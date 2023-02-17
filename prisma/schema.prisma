@@ -11,7 +11,32 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  twits     Twit[]
+  likes     Like[]
+  createdAt DateTime @default(now())
+}
+
+model Twit {
+  id        Int      @id @default(autoincrement())
+  twit      String
+  type      String   @default("twit")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  likes     Like[]
+  commentId Int?     @unique
+  comment   Twit?    @relation("TwitComments", fields: [commentId], references: [id])
+  comments  Twit[]   @relation("TwitComments")
+  createdAt DateTime @default(now())
+}
+
+model Like {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  twit   Twit @relation(fields: [twitId], references: [id])
+  twitId Int
 }
