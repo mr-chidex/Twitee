@@ -5,6 +5,7 @@ import config from '../config';
 const globalWithPrisma = global as typeof globalThis & {
   prisma: PrismaClient;
 };
+
 const prisma: PrismaClient = globalWithPrisma.prisma || new PrismaClient({ log: ['query'] });
 
 if (config.NODE_ENV === 'development') {
@@ -20,4 +21,4 @@ if (config.NODE_ENV === 'development') {
   });
 }
 
-export default prisma;
+export const Prisma = prisma;

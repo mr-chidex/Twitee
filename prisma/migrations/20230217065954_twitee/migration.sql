@@ -13,6 +13,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Twit" (
     "id" SERIAL NOT NULL,
     "twit" TEXT NOT NULL,
+    "type" TEXT NOT NULL DEFAULT 'twit',
     "userId" INTEGER NOT NULL,
     "commentId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

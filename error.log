@@ -1,0 +1,42 @@
+{
+  level: 'error',
+  message: '"name" is required',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T05:27:51.366Z'
+}
+{
+  level: 'error',
+  message: '"name" is required',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T07:47:25.609Z'
+}
+{
+  level: 'error',
+  message: 'Email already in use',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T07:49:19.171Z'
+}
+{
+  level: 'error',
+  message: '"name" is not allowed',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T07:58:09.937Z'
+}
+{
+  level: 'error',
+  message: 'Email or Password is incorrect',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T07:58:29.489Z'
+}
+{
+  level: 'error',
+  message: 'Email or Password is incorrect',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T07:58:40.120Z'
+}
