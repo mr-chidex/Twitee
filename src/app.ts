@@ -5,6 +5,7 @@ import helmet from 'helmet';
 
 import config from './config';
 import { authRoutes } from './routes';
+import { ErrorHandler } from './handlers';
 
 const app: Application = express();
 const apiVersion = config.API_VERSION || 'v1';
@@ -20,6 +21,6 @@ app.disable('x-powered-by');
 app.use(`/api/${apiVersion}/auth`, authRoutes);
 
 //error handler
-// ================
+app.use(ErrorHandler.error);
 
 export default app;
