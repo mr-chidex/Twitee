@@ -156,7 +156,7 @@ class TwitService {
     };
   }
 
-  async likeOrUnlikeTwit(iid: string) {
+  async likeOrUnlikeTwit(user: IUser, id: string) {
     const twitId = this.validateId(id);
 
     const twit = await Prisma.twit.findFirst({ where: { id: twitId } });
@@ -164,21 +164,23 @@ class TwitService {
       return errorResponse('twitnot found', 404);
     }
 
-    // check if post has been liked by user
-    const alreadLiked = await Like.findOne({ where: { user: { id: user.id }, post: { id: postId } } });
+    // check if twut has been liked by user
+    const alreadLiked = await Prisma.like.findFirst({ where: { userId: user.id, twitId } });
 
-    // if already liked, unlike post
+    // if already liked, unlike twit
     if (alreadLiked) {
-      await alreadLiked.remove();
-
-      return res.json({ success: true, messsage: 'successfully unliked post' });
+      await Prisma.like.delete({ where: { id: alreadLiked.id } });
     }
 
-    // like post
-    await Like.create({
-      post,
-      user,
-    }).save();
+    // like twit
+    await Prisma.like.create({
+      data: { userId: user.id, twitId },
+    });
+
+    return {
+      success: true,
+      message: 'success',
+    };
   }
 }
 

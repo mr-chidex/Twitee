@@ -14,5 +14,6 @@ router
   .patch(authMiddleware.auth, twitController.updateTwit);
 
 router.route('/user/:userId').get(twitController.getTwitsOfUser);
+router.route('/like/:twitId').get(authMiddleware.auth, twitController.likeAndUnlikeTwit);
 
 export const twitRoutes = router;

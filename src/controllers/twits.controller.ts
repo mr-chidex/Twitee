@@ -39,6 +39,12 @@ class TwitController {
     const response = await twitService.updateTwit(req.user!, req.params?.id, req.body);
     res.status(200).json({ ...response });
   }
+
+  //@GET
+  async likeAndUnlikeTwit(req: IRequest, res: Response) {
+    const response = await twitService.likeOrUnlikeTwit(req.user!, req.params?.twitId);
+    res.status(200).json({ ...response });
+  }
 }
 
 export const twitController = new TwitController();

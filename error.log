@@ -194,3 +194,10 @@
   label: 'error occurred',
   timestamp: '2023-02-17T10:25:16.775Z'
 }
+{
+  level: 'error',
+  message: 'Not authorized to delete this twit: Forbidden',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T10:26:22.013Z'
+}
