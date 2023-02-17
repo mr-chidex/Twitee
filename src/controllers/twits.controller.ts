@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 import { twitService } from '../services';
 import { IRequest } from './inteface';
@@ -10,15 +10,35 @@ class TwitController {
     res.status(201).json({ ...response });
   }
 
-  async getAllTwits() {}
+  //@GET
+  async getAllTwit(req: Request, res: Response) {
+    const response = await twitService.getTwits();
+    res.status(200).json({ ...response });
+  }
 
-  async getTwit() {}
+  //@GET
+  async getTwit(req: Request, res: Response) {
+    const response = await twitService.getTwit(req.params?.id);
+    res.status(200).json({ ...response });
+  }
 
-  async getUserTwits() {}
+  //@GET
+  async getTwitsOfUser(req: Request, res: Response) {
+    const response = await twitService.getAllTwitOfAUser(req.params?.userId);
+    res.status(200).json({ ...response });
+  }
 
-  async deleteTwit() {}
+  //@DELETE
+  async deleteTwit(req: IRequest, res: Response) {
+    const response = await twitService.deleteTwit(req.user!, req.params?.id);
+    res.status(200).json({ ...response });
+  }
 
-  async updateTwit() {}
+  //@PATCH
+  async updateTwit(req: IRequest, res: Response) {
+    const response = await twitService.updateTwit(req.user!, req.params?.id, req.body);
+    res.status(200).json({ ...response });
+  }
 }
 
 export const twitController = new TwitController();

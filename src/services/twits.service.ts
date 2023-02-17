@@ -30,7 +30,9 @@ class TwitService {
   async getTwits() {
     const twits = await Prisma.twit.findMany({
       include: {
-        user: true,
+        user: {
+          select: { name: true, email: true },
+        },
         likes: true,
         comments: true,
       },
@@ -44,14 +46,139 @@ class TwitService {
     };
   }
 
-  async getTwit(twitId: number) {
-    const twit = await Prisma.twit.findFirst({ where: { id: twitId } });
+  async getTwit(twitId: string) {
+    const twitID = this.validateId(twitId);
+
+    const twit = await Prisma.twit.findFirst({
+      where: { id: twitID },
+      include: {
+        user: {
+          select: { name: true, email: true },
+        },
+        likes: true,
+        comments: true,
+      },
+    });
 
     return {
       success: true,
       message: 'success',
       data: twit,
     };
+  }
+
+  validateId(id: any) {
+    if (!id) {
+      errorResponse('invalid id', 400);
+    }
+
+    const twitId = parseInt(id);
+
+    if (!twitId) {
+      errorResponse('invalid id', 400);
+    }
+    return twitId;
+  }
+
+  async getAllTwitOfAUser(userId: string) {
+    const userID = this.validateId(userId);
+
+    const twits = await Prisma.twit.findMany({
+      include: {
+        user: {
+          select: { name: true, email: true },
+        },
+        likes: true,
+        comments: true,
+      },
+      where: { type: TwitType.TWIT, userId: userID },
+    });
+    userID;
+
+    return {
+      success: true,
+      message: 'success',
+      data: twits,
+    };
+  }
+
+  async deleteTwit(user: IUser, id: string) {
+    const twitId = this.validateId(id);
+
+    // get twit if it belongs to user
+    const twit = await Prisma.twit.findFirst({
+      where: { id: twitId, userId: user.id },
+    });
+
+    if (!twit) {
+      return errorResponse('Not authorized to delete this twit: Forbidden', 403);
+    }
+
+    await Prisma.twit.delete({
+      where: { id: twitId },
+    });
+
+    return {
+      success: true,
+      message: 'Twit successfully deleted',
+    };
+  }
+
+  async updateTwit(user: IUser, id: string, body: ITwit) {
+    const twitId = this.validateId(id);
+
+    this.validatePostedTwit(body);
+
+    const { twit } = body;
+
+    // get twit if it belongs to user
+    const isExist = await Prisma.twit.findFirst({
+      where: { id: twitId, userId: user.id },
+    });
+
+    if (!isExist) {
+      return errorResponse('Not authorized to update this twit: Forbidden', 403);
+    }
+
+    const updatedTwit = await Prisma.twit.update({
+      where: {
+        id: twitId,
+      },
+      data: {
+        twit,
+      },
+    });
+
+    return {
+      success: true,
+      message: 'Twit successfully updated',
+      data: { twit: updatedTwit },
+    };
+  }
+
+  async likeOrUnlikeTwit(iid: string) {
+    const twitId = this.validateId(id);
+
+    const twit = await Prisma.twit.findFirst({ where: { id: twitId } });
+    if (!twit) {
+      return errorResponse('twitnot found', 404);
+    }
+
+    // check if post has been liked by user
+    const alreadLiked = await Like.findOne({ where: { user: { id: user.id }, post: { id: postId } } });
+
+    // if already liked, unlike post
+    if (alreadLiked) {
+      await alreadLiked.remove();
+
+      return res.json({ success: true, messsage: 'successfully unliked post' });
+    }
+
+    // like post
+    await Like.create({
+      post,
+      user,
+    }).save();
   }
 }
 
