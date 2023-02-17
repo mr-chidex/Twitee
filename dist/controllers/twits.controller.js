@@ -58,5 +58,13 @@ class TwitController {
             res.status(200).json(Object.assign({}, response));
         });
     }
+    //@GET
+    likeAndUnlikeTwit(req, res) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield services_1.twitService.likeOrUnlikeTwit(req.user, (_a = req.params) === null || _a === void 0 ? void 0 : _a.twitId);
+            res.status(200).json(Object.assign({}, response));
+        });
+    }
 }
 exports.twitController = new TwitController();

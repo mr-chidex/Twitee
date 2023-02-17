@@ -15,4 +15,5 @@ router
     .delete(middlewares_1.authMiddleware.auth, controllers_1.twitController.deleteTwit)
     .patch(middlewares_1.authMiddleware.auth, controllers_1.twitController.updateTwit);
 router.route('/user/:userId').get(controllers_1.twitController.getTwitsOfUser);
+router.route('/likes/:twitId').get(middlewares_1.authMiddleware.auth, controllers_1.twitController.likeAndUnlikeTwit);
 exports.twitRoutes = router;

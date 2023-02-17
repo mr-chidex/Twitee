@@ -150,25 +150,27 @@ class TwitService {
             };
         });
     }
-    likeOrUnlikeTwit(iid) {
+    likeOrUnlikeTwit(user, id) {
         return __awaiter(this, void 0, void 0, function* () {
             const twitId = this.validateId(id);
             const twit = yield prisma_1.Prisma.twit.findFirst({ where: { id: twitId } });
             if (!twit) {
                 return (0, utils_1.errorResponse)('twitnot found', 404);
             }
-            // check if post has been liked by user
-            const alreadLiked = yield Like.findOne({ where: { user: { id: user.id }, post: { id: postId } } });
-            // if already liked, unlike post
+            // check if twut has been liked by user
+            const alreadLiked = yield prisma_1.Prisma.like.findFirst({ where: { userId: user.id, twitId } });
+            // if already liked, unlike twit
             if (alreadLiked) {
-                yield alreadLiked.remove();
-                return res.json({ success: true, messsage: 'successfully unliked post' });
+                yield prisma_1.Prisma.like.delete({ where: { id: alreadLiked.id } });
             }
-            // like post
-            yield Like.create({
-                post,
-                user,
-            }).save();
+            // like twit
+            yield prisma_1.Prisma.like.create({
+                data: { userId: user.id, twitId },
+            });
+            return {
+                success: true,
+                message: 'success',
+            };
         });
     }
 }
