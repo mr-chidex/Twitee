@@ -4,7 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 
 import config from './config';
-import { authRoutes } from './routes';
+import { authRoutes, twitRoutes } from './routes';
 import { ErrorHandler } from './handlers';
 
 const app: Application = express();
@@ -19,6 +19,7 @@ app.disable('x-powered-by');
 
 //routes
 app.use(`/api/${apiVersion}/auth`, authRoutes);
+app.use(`/api/${apiVersion}/twits`, twitRoutes);
 
 //error handler
 app.use(ErrorHandler.error);
