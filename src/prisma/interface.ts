@@ -4,9 +4,15 @@ export enum TwitType {
 }
 
 export interface IUser {
-  _id?: string;
+  id: number;
   name: string;
   email: string;
   password: string;
   createdAt: Date;
+}
+
+export interface ITwit {
+  id: number;
+  twit: string;
+  type: TwitType;
 }

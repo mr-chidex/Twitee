@@ -82,3 +82,129 @@
   label: 'error occurred',
   timestamp: '2023-02-17T07:58:40.120Z'
 }
+{
+  level: 'info',
+  message: '"twit" is required',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:05:37.911Z'
+}
+{
+  level: 'error',
+  message: '"twit" is required',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:05:37.927Z'
+}
+{
+  level: 'info',
+  message: "Cannot read properties of undefined (reading 'id')",
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:06:09.167Z'
+}
+{
+  level: 'error',
+  message: "Cannot read properties of undefined (reading 'id')",
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:06:09.189Z'
+}
+{
+  level: 'info',
+  message: 'No authorization header',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:08:33.998Z'
+}
+{
+  level: 'error',
+  message: 'No authorization header',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:08:34.006Z'
+}
+{
+  level: 'info',
+  message: 'Unexpected token � in JSON at position 15',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:08:45.984Z'
+}
+{
+  level: 'error',
+  message: 'Unexpected token � in JSON at position 15',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:08:46.086Z'
+}
+{
+  level: 'info',
+  message: 'Unexpected token � in JSON at position 16',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:08:53.529Z'
+}
+{
+  level: 'error',
+  message: 'Unexpected token � in JSON at position 16',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:08:53.533Z'
+}
+{
+  level: 'info',
+  message: 'Unexpected token � in JSON at position 15',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:01.828Z'
+}
+{
+  level: 'error',
+  message: 'Unexpected token � in JSON at position 15',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:01.833Z'
+}
+{
+  level: 'info',
+  message: 'Unexpected token � in JSON at position 15',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:08.769Z'
+}
+{
+  level: 'error',
+  message: 'Unexpected token � in JSON at position 15',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:08.777Z'
+}
+{
+  level: 'info',
+  message: 'No authorization header',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:21.915Z'
+}
+{
+  level: 'error',
+  message: 'No authorization header',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:21.933Z'
+}
+{
+  level: 'info',
+  message: 'No authorization header',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:40.009Z'
+}
+{
+  level: 'error',
+  message: 'No authorization header',
+  service: 'user-service',
+  label: 'error occurred',
+  timestamp: '2023-02-17T09:09:40.031Z'
+}

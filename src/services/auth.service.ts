@@ -91,7 +91,7 @@ class AuthService {
       {
         iat: Date.now(),
         iss: 'mainstack',
-        userId: user._id,
+        userId: user.id,
       },
       config.SECRET_KEY,
       { expiresIn: '48h' },
