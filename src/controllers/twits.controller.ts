@@ -40,7 +40,7 @@ class TwitController {
     res.status(200).json({ ...response });
   }
 
-  //@GET
+  //@POST
   async likeAndUnlikeTwit(req: IRequest, res: Response) {
     const response = await twitService.likeOrUnlikeTwit(req.user!, req.params?.twitId);
     res.status(200).json({ ...response });

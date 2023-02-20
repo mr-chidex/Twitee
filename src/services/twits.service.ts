@@ -161,21 +161,21 @@ class TwitService {
 
     const twit = await Prisma.twit.findFirst({ where: { id: twitId } });
     if (!twit) {
-      return errorResponse('twitnot found', 404);
+      return errorResponse('twit not found', 404);
     }
 
-    // check if twut has been liked by user
+    // check if twit has been liked by user
     const alreadLiked = await Prisma.like.findFirst({ where: { userId: user.id, twitId } });
 
     // if already liked, unlike twit
     if (alreadLiked) {
       await Prisma.like.delete({ where: { id: alreadLiked.id } });
+    } else {
+      // like twit
+      await Prisma.like.create({
+        data: { userId: user.id, twitId },
+      });
     }
-
-    // like twit
-    await Prisma.like.create({
-      data: { userId: user.id, twitId },
-    });
 
     return {
       success: true,
