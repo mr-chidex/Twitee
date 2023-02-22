@@ -27,8 +27,8 @@ model Twit {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   likes     Like[]
-  commentId Int?     @unique
-  comment   Twit?    @relation("TwitComments", fields: [commentId], references: [id])
+  twitId    Int?
+  comment   Twit?    @relation("TwitComments", fields: [twitId], references: [id])
   comments  Twit[]   @relation("TwitComments")
   createdAt DateTime @default(now())
 }

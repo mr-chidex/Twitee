@@ -152,7 +152,7 @@ class TwitService {
     return {
       success: true,
       message: 'Twit successfully updated',
-      data: { twit: updatedTwit },
+      data: updatedTwit,
     };
   }
 
@@ -180,6 +180,36 @@ class TwitService {
     return {
       success: true,
       message: 'success',
+    };
+  }
+
+  async createComment(user: IUser, body: ITwit, twitId: string) {
+    const twitID = this.validateId(twitId);
+
+    //validate request body
+    this.validatePostedTwit(body);
+
+    const { twit } = body;
+
+    const twitToComment = await Prisma.twit.findFirst({ where: { id: twitID } });
+
+    if (!twitToComment) {
+      errorResponse("Can't comment on this twit. Twit not found", 404);
+    }
+
+    const comment = await Prisma.twit.create({
+      data: {
+        twit,
+        type: TwitType.COMMENT,
+        userId: user.id,
+        twitId: twitToComment?.id,
+      },
+    });
+
+    return {
+      success: true,
+      message: 'Comment posted successfully',
+      data: comment,
     };
   }
 }

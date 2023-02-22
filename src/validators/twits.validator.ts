@@ -7,10 +7,3 @@ export const validateTWit = (twit: ITwit) => {
     twit: Joi.string().min(1).trim().required(),
   }).validate(twit);
 };
-
-export const validateComment = (twit: ITwit) => {
-  return Joi.object({
-    twit: Joi.string().min(3).trim().required(),
-    twitId: Joi.number().required(),
-  }).validate(twit);
-};

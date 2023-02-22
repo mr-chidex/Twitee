@@ -45,6 +45,12 @@ class TwitController {
     const response = await twitService.likeOrUnlikeTwit(req.user!, req.params?.twitId);
     res.status(200).json({ ...response });
   }
+
+  //@POST
+  async addComment(req: IRequest, res: Response) {
+    const response = await twitService.createComment(req.user!, req.body, req.params?.twitId);
+    res.status(201).json({ ...response });
+  }
 }
 
 export const twitController = new TwitController();
