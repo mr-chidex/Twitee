@@ -16,7 +16,7 @@ FEATURES
 4. User can delete twit (if owned by user)
 5. User can add comments under twits
 6. User can like twit
-7. User can view all twi
+7. User can view all twit
 
 ---
 
@@ -47,12 +47,18 @@ POST /api/v1/auth/login
 Twiit
 ===
 
-POST /api/v1/twits
-GET /api/v1/twits
-    /api/v1/twits/:twitId
-    /api/v1/twits/users/:userId
-    /api/v1/twits/likes/:twitId
+POST    /api/v1/twits
+GET     /api/v1/twits
+GET     /api/v1/twits/:twitId
+GET     /api/v1/twits/users/:userId
+POST    /api/v1/twits/likes/:twitId
+POST    /api/v1/twits/likcomments/:twitId
 ```
+
+## NOTE 📢
+
+- A twit can have a comment
+- A comment is a twit 😉
 
 ## Clone this project
 
