@@ -15,7 +15,7 @@ class TwitService {
     return {
       success: true,
       message: 'Twit posted successfully',
-      data: { twit: newTwit },
+      data: newTwit,
     };
   }
 
@@ -93,7 +93,6 @@ class TwitService {
       },
       where: { type: TwitType.TWIT, userId: userID },
     });
-    userID;
 
     return {
       success: true,
@@ -208,7 +207,7 @@ class TwitService {
 
     return {
       success: true,
-      message: 'Comment posted successfully',
+      message: 'Comment successfully posted',
       data: comment,
     };
   }
