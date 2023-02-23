@@ -36,7 +36,7 @@ class AuthService {
   }
 
   async validateRegisterationEmail(email: string) {
-    const isEmail = await Prisma.user.findUnique({ where: { email } });
+    const isEmail = await this.findUserByEmail(email);
     if (isEmail) {
       errorResponse('Email already in use', 400);
     }
