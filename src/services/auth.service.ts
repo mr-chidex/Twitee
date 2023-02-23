@@ -7,6 +7,29 @@ import { errorResponse } from '../utils';
 import { validateLoginParams, validateRegisterParams } from '../validators';
 
 class AuthService {
+  validateRegisterationParams(body: IUser) {
+    const { error } = validateRegisterParams(body);
+    if (error) {
+      errorResponse(error.details[0].message, 400);
+    }
+  }
+
+  async findUserByEmail(email: string) {
+    return await Prisma.user.findFirst({ where: { email } });
+  }
+
+  async validateRegisterationEmail(email: string) {
+    const isEmail = await this.findUserByEmail(email);
+    if (isEmail) {
+      errorResponse('Email already in use', 400);
+    }
+  }
+
+  async hashPassword(password: string) {
+    const salt = await bcrypt.genSalt(12);
+    return await bcrypt.hash(password, salt);
+  }
+
   async register(body: IUser) {
     this.validateRegisterationParams(body);
 
@@ -25,48 +48,6 @@ class AuthService {
     return {
       success: true,
       message: 'Account successfully created',
-    };
-  }
-
-  validateRegisterationParams(body: IUser) {
-    const { error } = validateRegisterParams(body);
-    if (error) {
-      errorResponse(error.details[0].message, 400);
-    }
-  }
-
-  async validateRegisterationEmail(email: string) {
-    const isEmail = await this.findUserByEmail(email);
-    if (isEmail) {
-      errorResponse('Email already in use', 400);
-    }
-  }
-
-  async findUserByEmail(email: string) {
-    return await Prisma.user.findFirst({ where: { email } });
-  }
-
-  async hashPassword(password: string) {
-    const salt = await bcrypt.genSalt(12);
-    return await bcrypt.hash(password, salt);
-  }
-
-  async login(body: IUser) {
-    const { error } = validateLoginParams(body);
-    if (error) {
-      errorResponse(error.details[0].message, 400);
-    }
-
-    const { email, password } = body;
-
-    const user = await this.validateCredentials(email, password);
-
-    const token = this.getToken(user);
-
-    return {
-      success: true,
-      message: 'Login successful',
-      data: token,
     };
   }
 
@@ -96,6 +77,25 @@ class AuthService {
       config.SECRET_KEY,
       { expiresIn: '48h' },
     );
+  }
+
+  async login(body: IUser) {
+    const { error } = validateLoginParams(body);
+    if (error) {
+      errorResponse(error.details[0].message, 400);
+    }
+
+    const { email, password } = body;
+
+    const user = await this.validateCredentials(email, password);
+
+    const token = this.getToken(user);
+
+    return {
+      success: true,
+      message: 'Login successful',
+      data: token,
+    };
   }
 }
 
