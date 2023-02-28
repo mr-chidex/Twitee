@@ -52,7 +52,7 @@ GET     /api/v1/twits
 GET     /api/v1/twits/:twitId
 GET     /api/v1/twits/users/:userId
 POST    /api/v1/twits/likes/:twitId
-POST    /api/v1/twits/likcomments/:twitId
+POST    /api/v1/twits/comments/:twitId
 ```
 
 ## NOTE 📢
